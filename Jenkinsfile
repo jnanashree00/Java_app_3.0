@@ -10,7 +10,8 @@ pipeline{
         choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
         string(name: 'ImageName', description: "name of the docker build", defaultValue: 'javapp')
         string(name: 'ImageTag', description: "tag of the docker build", defaultValue: 'v1')
-        string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'Jnanashree')
+        string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'jnanashree')
+        string(name: 'Region', defaultValue: 'us-east-1', description: 'AWS Region for ECR')
     }
 
     stages{
@@ -96,7 +97,7 @@ pipeline{
             steps{
                script{
                    
-                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+                   dockerImagePush("${params.ImageName}","${params.Region}","${params.DockerHubUser}")
                }
             }
         }   
